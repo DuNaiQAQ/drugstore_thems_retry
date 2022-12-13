@@ -21,7 +21,7 @@
                 <div class="login-btn">
                     <el-button type="primary" @click="submitForm()">登录</el-button>
                 </div>
-                <p class="login-tips">Tips : 用户名和密码随便填。</p>
+                <p class="login-tips">注意：初始密码为123456，进入系统后请及时修改密码</p>
             </el-form>
         </div>
     </div>
@@ -32,13 +32,14 @@ import { ref, reactive } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 import { ElMessage } from "element-plus";
+import {UserHelper} from '../../api/user';
 
 export default {
     setup() {
         const router = useRouter();
         const param = reactive({
-            username: "admin",
-            password: "123123",
+            username: "",
+            password: "",
         });
 
         const rules = {
@@ -57,11 +58,30 @@ export default {
         const submitForm = () => {
             login.value.validate((valid) => {
                 if (valid) {
-                    ElMessage.success("登录成功");
-                    localStorage.setItem("ms_username", param.username);
-                    router.push("/");
+                  var params=JSON.stringify({
+                    username:param.username,
+                    password:param.password,
+                  })
+                  ElMessage.success("登录成功");
+                  localStorage.setItem("ms_username", "admin");
+                  router.push("/dashboard");
+                  // UserHelper.login(params).then(info => {
+                  //   if(info.code==200){
+                  //     if(info.message==="1") {
+                  //     }else{
+                  //       localStorage.setItem("ms_username", info.res.username);
+                  //       ElMessage.success("登录成功");
+                  //       router.push("/user_find");
+                  //     }
+                  //   }else {
+                  //     ElMessage.error(info.message)
+                  //   }
+                  // }, err => {
+                  //   console.log(info.message);
+                  //   ElMessage.error(info.message);
+                  // })
                 } else {
-                    ElMessage.error("登录成功");
+                    ElMessage.error();
                     return false;
                 }
             });
@@ -85,7 +105,7 @@ export default {
     position: relative;
     width: 100%;
     height: 100%;
-    background-image: url(../assets/img/login-bg.jpg);
+    background-image: url(../../assets/img/login-bg.jpg);
     background-size: 100%;
 }
 .ms-title {

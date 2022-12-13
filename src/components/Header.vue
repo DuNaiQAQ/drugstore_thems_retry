@@ -5,18 +5,9 @@
             <i v-if="!collapse" class="el-icon-s-fold"></i>
             <i v-else class="el-icon-s-unfold"></i>
         </div>
-        <div class="logo">后台管理系统</div>
+        <div class="logo">药店管理系统</div>
         <div class="header-right">
             <div class="header-user-con">
-                <!-- 消息中心 -->
-                <div class="btn-bell">
-                    <el-tooltip effect="dark" :content="message?`有${message}条未读消息`:`消息中心`" placement="bottom">
-                        <router-link to="/tabs">
-                            <i class="el-icon-bell"></i>
-                        </router-link>
-                    </el-tooltip>
-                    <span class="btn-bell-badge" v-if="message"></span>
-                </div>
                 <!-- 用户头像 -->
                 <div class="user-avator">
                     <img src="../assets/img/img.jpg" />
@@ -29,9 +20,6 @@
                     </span>
                     <template #dropdown>
                         <el-dropdown-menu>
-                            <a href="https://github.com/lin-xin/vue-manage-system" target="_blank">
-                                <el-dropdown-item>项目仓库</el-dropdown-item>
-                            </a>
                             <el-dropdown-item command="user">个人中心</el-dropdown-item>
                             <el-dropdown-item divided command="loginout">退出登录</el-dropdown-item>
                         </el-dropdown-menu>
@@ -45,6 +33,9 @@
 import { computed, onMounted } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
+import {UserHelper} from "../api/user";
+import {ElMessage} from "element-plus";
+
 export default {
     setup() {
         const username = localStorage.getItem("ms_username");
@@ -68,7 +59,15 @@ export default {
         const handleCommand = (command) => {
             if (command == "loginout") {
                 localStorage.removeItem("ms_username");
-                router.push("/login");
+                UserHelper.logout_admin().then((info)=>{
+                  if(info.code===200){
+                    ElMessage.success("退出登录成功")
+                    router.push("/login")
+                  }else{
+                    ElMessage.error(info.message)
+                    router.push("/login");
+                  }
+                })
             } else if (command == "user") {
                 router.push("/user");
             }

@@ -51,7 +51,7 @@ export default {
             if (item) {
                 delItem.path === route.fullPath && router.push(item.path);
             } else {
-                router.push("/");
+                router.push("/dashboard");
             }
         };
 
@@ -79,7 +79,7 @@ export default {
         // 关闭全部标签
         const closeAll = () => {
             store.commit("clearTags");
-            router.push("/");
+            router.push("/dashboard");
         };
         // 关闭其他标签
         const closeOther = () => {

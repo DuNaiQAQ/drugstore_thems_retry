@@ -1,10 +1,10 @@
 import {createRouter, createWebHashHistory} from "vue-router";
-import Home from "../views/Home.vue";
+import Home from "../views/basepages/Home.vue";
 
 const routes = [
     {
         path: '/',
-        redirect: '/dashboard'
+        redirect: '/login'
     }, {
         path: "/",
         name: "Home",
@@ -18,97 +18,110 @@ const routes = [
                 },
                 component: () => import ( /* webpackChunkName: "dashboard" */ "../views/Dashboard.vue")
             }, {
-                path: "/table",
-                name: "basetable",
-                meta: {
-                    title: '表格'
-                },
-                component: () => import ( /* webpackChunkName: "table" */ "../views/BaseTable.vue")
-            }, {
-                path: "/charts",
-                name: "basecharts",
-                meta: {
-                    title: '图表'
-                },
-                component: () => import ( /* webpackChunkName: "charts" */ "../views/BaseCharts.vue")
-            }, {
-                path: "/form",
-                name: "baseform",
-                meta: {
-                    title: '表单'
-                },
-                component: () => import ( /* webpackChunkName: "form" */ "../views/BaseForm.vue")
-            }, {
-                path: "/tabs",
-                name: "tabs",
-                meta: {
-                    title: 'tab标签'
-                },
-                component: () => import ( /* webpackChunkName: "tabs" */ "../views/Tabs.vue")
-            }, {
-                path: "/donate",
-                name: "donate",
-                meta: {
-                    title: '鼓励作者'
-                },
-                component: () => import ( /* webpackChunkName: "donate" */ "../views/Donate.vue")
-            }, {
-                path: "/permission",
-                name: "permission",
-                meta: {
-                    title: '权限管理',
-                    permission: true
-                },
-                component: () => import ( /* webpackChunkName: "permission" */ "../views/Permission.vue")
-            }, {
-                path: "/i18n",
-                name: "i18n",
-                meta: {
-                    title: '国际化语言'
-                },
-                component: () => import ( /* webpackChunkName: "i18n" */ "../views/I18n.vue")
-            }, {
-                path: "/upload",
-                name: "upload",
-                meta: {
-                    title: '上传插件'
-                },
-                component: () => import ( /* webpackChunkName: "upload" */ "../views/Upload.vue")
-            }, {
-                path: "/icon",
-                name: "icon",
-                meta: {
-                    title: '自定义图标'
-                },
-                component: () => import ( /* webpackChunkName: "icon" */ "../views/Icon.vue")
-            }, {
-                path: '/404',
-                name: '404',
-                meta: {
-                    title: '找不到页面'
-                },
-                component: () => import (/* webpackChunkName: "404" */ '../views/404.vue')
-            }, {
-                path: '/403',
-                name: '403',
-                meta: {
-                    title: '没有权限'
-                },
-                component: () => import (/* webpackChunkName: "403" */ '../views/403.vue')
-            }, {
                 path: '/user',
                 name: 'user',
                 meta: {
                     title: '个人中心'
                 },
-                component: () => import (/* webpackChunkName: "user" */ '../views/User.vue')
+                component: () => import (/* webpackChunkName: "user" */ '../views/basepages/User.vue')
             }, {
-                path: '/editor',
-                name: 'editor',
+                path: '/allstaff',
+                name: 'allstaff',
                 meta: {
-                    title: '富文本编辑器'
+                    title:'所有员工信息'
                 },
-                component: () => import (/* webpackChunkName: "editor" */ '../views/Editor.vue')
+                component: () => import('../views/employee/AllStaff.vue')
+            },{
+                path: '/stafftype',
+                name: 'stafftype',
+                meta: {
+                    title: '职工类别'
+                },
+                component: () => import('../views/employee/StaffType.vue')
+            },{
+                path: '/alldrug',
+                name: 'alldrug',
+                meta:{
+                    title:'添加员工',
+                },
+                component: () => import ('../views/drugs/AllDrug.vue')
+            },{
+                path: '/purchase',
+                name: 'purchase',
+                meta:{
+                    title:'入库信息管理',
+                },
+                component: () => import ('../views/storehouse/In.vue')
+            },{
+                path: '/out',
+                name: 'out',
+                meta:{
+                    title:'出库信息管理',
+                },
+                component: () => import ('../views/storehouse/Out.vue')
+            },{
+                path: '/factory',
+                name: 'factory',
+                meta:{
+                    title:'制造商信息管理',
+                },
+                component: () => import ('../views/factory/FactoryInfo.vue')
+            },{
+                path: '/factory',
+                name: 'factory',
+                meta:{
+                    title:'制造商信息管理',
+                },
+                component: () => import ('../views/factory/FactoryInfo.vue')
+            },{
+                path: '/drugs',
+                name: 'drugs',
+                meta:{
+                    title:'药品信息管理',
+                },
+                component: () => import ('../views/drugs/AllDrug.vue')
+            },{
+                path: '/drugtype',
+                name: 'drugtype',
+                meta:{
+                    title:'药品类别管理',
+                },
+                component: () => import ('../views/drugs/DrugCategory.vue')
+            },{
+                path: '/sell',
+                name: 'sell',
+                meta:{
+                    title:'药品查找以及收银',
+                },
+                component: () => import ('../views/drugs/Sell.vue')
+            },{
+                path: '/log',
+                name: 'log',
+                meta:{
+                    title:'日志查看',
+                },
+                component: () => import ('../views/log/log.vue')
+            },{
+                path: '/buy',
+                name: 'buy',
+                meta:{
+                    title:'用户购买统计',
+                },
+                component: () => import ('../views/money/user_sell.vue')
+            },{
+                path: '/allmoney',
+                name: 'allmoney',
+                meta:{
+                    title:'所有收银统计',
+                },
+                component: () => import ('../views/money/psinfo.vue')
+            },{
+                path: '/allcustomer',
+                name: 'allcustomer',
+                meta:{
+                    title:'所有收银统计',
+                },
+                component: () => import ('../views/users/AllCoustmer.vue')
             }
         ]
     }, {
@@ -117,7 +130,21 @@ const routes = [
         meta: {
             title: '登录'
         },
-        component: () => import ( /* webpackChunkName: "login" */ "../views/Login.vue")
+        component: () => import ( /* webpackChunkName: "login" */ "../views/login/Login.vue")
+    }, {
+        path: "/user_find",
+        name: "user_find",
+        meta: {
+            title: '用户主界面'
+        },
+        component: () => import ( /* webpackChunkName: "login" */ "../views/users/user_finddrug.vue")
+    }, {
+        path: "/user_info",
+        name: "user_info",
+        meta: {
+            title: '用户主界面'
+        },
+        component: () => import ( /* webpackChunkName: "login" */ "../views/users/user_userinfo.vue")
     }
 ];
 
